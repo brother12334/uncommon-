@@ -61,6 +61,11 @@ const canvasReport = (target) =>
       signature: canvas.toDataURL(),
     };
   }, PALETTE);
+// Clicks Daisy's face: art px (18, 28) on the 68 × 50 stage.
+const clickDaisy = async (target) => {
+  const box = await target.locator(".friends-canvas").boundingBox();
+  await target.mouse.click(box.x + (18 / 68) * box.width, box.y + (28 / 50) * box.height);
+};
 const jump = async (id) => {
   await page.evaluate(
     (target) =>
@@ -90,18 +95,16 @@ try {
   expect(idle.rendering).toBe("pixelated");
   expect(idle.painted).toBeGreaterThan(1000);
   expect(idle.offPalette).toBe(0);
-  await page.mouse.move(1000, 400);
-  await page
-    .getByRole("button", { name: "Say hello to the pixel friends" })
-    .click();
-  await page.waitForTimeout(300);
-  const midNudge = await canvasReport(page);
-  expect(midNudge.signature).not.toBe(idle.signature);
-  expect(midNudge.offPalette).toBe(0);
+  await expect(page.locator(".hero-scroll")).toHaveCount(0);
+  await clickDaisy(page);
+  await page.waitForTimeout(150);
+  const midBoop = await canvasReport(page);
+  expect(midBoop.signature).not.toBe(idle.signature);
+  expect(midBoop.offPalette).toBe(0);
   await page.waitForTimeout(1500);
   await page.screenshot({ path: "artifacts/desktop-hero.png" });
   check(
-    "Pixel friends draw at a whole-number 8× scale in palette colors only, and the nudge control animates them",
+    "Pixel friends draw at a whole-number 8× scale in palette colors only, and clicking Daisy boops her",
   );
 
   await page
@@ -401,9 +404,7 @@ try {
   const stillIdle = await canvasReport(page);
   await page.waitForTimeout(1200);
   expect((await canvasReport(page)).signature).toBe(stillIdle.signature);
-  await page
-    .getByRole("button", { name: "Say hello to the pixel friends" })
-    .click();
+  await clickDaisy(page);
   await page.waitForTimeout(150);
   const stillHappy = await canvasReport(page);
   expect(stillHappy.signature).not.toBe(stillIdle.signature);
@@ -412,7 +413,7 @@ try {
   await page.waitForTimeout(700);
   expect((await canvasReport(page)).signature).toBe(stillIdle.signature);
   check(
-    "With motion off the friends hold one frame, and a nudge shows a still happy face for 0.6 s",
+    "With motion off the friends hold one frame, and a boop shows a still happy face for 0.6 s",
   );
 
   const mobileContext = await browser.newContext({

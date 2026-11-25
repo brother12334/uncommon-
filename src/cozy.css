@@ -419,41 +419,6 @@ em {
 .hero-explore:hover > svg {
   transform: translateY(4px);
 }
-.hero-scroll {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-right: 8px;
-  margin-bottom: -3px;
-}
-.hero-scroll > span:first-child {
-  font:
-    500 23px "Caveat",
-    cursive;
-  color: #74606d;
-  transform: rotate(-7deg);
-}
-.scroll-circle {
-  width: 43px;
-  height: 43px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e6d9ecb8;
-  border: 1px solid #b6a0bb70;
-  border-radius: 50%;
-  transition:
-    background 0.3s,
-    transform 0.3s;
-}
-.hero-scroll:hover .scroll-circle {
-  background: #d8c4e5;
-  transform: rotate(15deg);
-}
-.scroll-circle svg {
-  animation: friendly-spark 4s ease-in-out infinite;
-  animation-play-state: var(--ambient-play, paused);
-}
 @keyframes friendly-spark {
   0%,
   65%,
@@ -1683,9 +1648,6 @@ em {
   .hero-copy > p {
     font-size: 12px;
   }
-  .hero-scroll > span:first-child {
-    font-size: 20px;
-  }
   .manifesto-layout {
     grid-template-columns: 25% 75%;
   }
@@ -1881,26 +1843,6 @@ em {
   .hero-explore {
     font-size: 9px;
     gap: 9px;
-  }
-  .hero-scroll {
-    position: absolute;
-    right: 3px;
-    bottom: 265px;
-    margin: 0;
-    gap: 7px;
-  }
-  .hero-scroll > span:first-child {
-    font-size: 20px;
-    max-width: 95px;
-    text-align: center;
-    line-height: 1;
-  }
-  .scroll-circle {
-    width: 34px;
-    height: 34px;
-  }
-  .scroll-circle svg {
-    width: 16px;
   }
   .marquee {
     min-height: 58px;
@@ -2375,14 +2317,6 @@ em {
   }
   .hero-copy h2 {
     font-size: 39px;
-  }
-  .hero-scroll {
-    bottom: 268px;
-    right: 0;
-  }
-  .hero-scroll > span:first-child {
-    font-size: 18px;
-    max-width: 82px;
   }
   .hero-actions {
     gap: 20px;

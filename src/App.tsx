@@ -28,7 +28,6 @@ import {
   Pause,
   Play,
   Plus,
-  Sparkles,
   X,
 } from "lucide-react";
 import gsap from "gsap";
@@ -513,7 +512,6 @@ export default function App() {
   const [skillModal, setSkillModal] = useState<"install" | "read" | null>(null);
   const [selectedExperiment, setSelectedExperiment] =
     useState<ExperimentInfo | null>(null);
-  const [nudge, setNudge] = useState(0);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const springX = useSpring(pointerX, { stiffness: 45, damping: 25 });
@@ -625,8 +623,7 @@ export default function App() {
           ".hero-friends",
           { opacity: 0, duration: 1.4, ease: "power2.out" },
           0.1,
-        )
-        .from(".hero-scroll", { opacity: 0, y: -15, duration: 0.7 }, 1.1);
+        );
       gsap.to(".hero-photo-parallax", {
         yPercent: 17,
         ease: "none",
@@ -824,7 +821,6 @@ export default function App() {
               >
                 <HeroFriends
                   enabled={motionEnabled}
-                  nudge={nudge}
                   pointerX={pointerX}
                   pointerY={pointerY}
                 />
@@ -878,19 +874,6 @@ export default function App() {
                   </button>
                 </div>
               </div>
-              <button
-                className="hero-scroll"
-                data-ambient
-                onClick={() => setNudge((value) => value + 1)}
-                aria-label="Say hello to the pixel friends"
-              >
-                <span aria-live="polite">
-                  {nudge > 0 ? "hello, friend!" : "give us a little nudge"}
-                </span>
-                <span className="scroll-circle">
-                  <Sparkles size={20} />
-                </span>
-              </button>
             </div>
           </section>
 

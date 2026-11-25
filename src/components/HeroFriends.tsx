@@ -14,7 +14,8 @@ import {
 
 type FriendProps = {
   enabled: boolean;
-  nudge: number;
+  /** Bump to play the spin, hop and wave. Optional; nothing in the hero sends it now. */
+  nudge?: number;
   pointerX: MotionValue<number>;
   pointerY: MotionValue<number>;
 };
@@ -39,7 +40,7 @@ function layoutFor(width: number, height: number, dpr: number): Layout {
   return { S, css, left: snap(cx - stageW / 2), top: snap(bottom - stageH) };
 }
 
-export default function HeroFriends({ enabled, nudge, pointerX }: FriendProps) {
+export default function HeroFriends({ enabled, nudge = 0, pointerX }: FriendProps) {
   const container = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
